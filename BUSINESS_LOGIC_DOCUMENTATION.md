@@ -11,7 +11,8 @@ The Business Logic layer models core domain entities and business rules independ
 - save()
 - update()
 - delete()
-## 3. User Entity
+## 3. User EntityAmenities are designed to be reusable across different places.
+
 **Methods**
 - register()
 - update_profile()
