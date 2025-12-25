@@ -23,3 +23,6 @@ The Business Logic layer models core domain entities and business rules independ
 The Place entity represents accommodation listings in the platform.
 ## Summary
 This document provides a clear reference for implementing the HBnB Business Logic layer.
+This layer is responsible for enforcing business rules and domain logic.
+BaseEntity ensures consistent lifecycle handling across all entities.
+_Last updated to improve documentation clarity._
