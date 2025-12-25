@@ -117,4 +117,4 @@ The Amenity class represents optional features or services that can be associate
 **Relationships**
 - **Amenity – Place (Many-to-Many):**  
   Amenities can be shared across multiple places, allowing flexible and scalable feature assignment.
-![HBnB Business Logic Class Diagram](./part1/HBnB_Class_Diagram_diagram.png)
+![HBnB Business Logic Class Diagram](part1/HBnB_Class%20Diagram_diagram.png)
