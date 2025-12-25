@@ -17,7 +17,8 @@ The Business Logic layer models core domain entities and business rules independ
 - update_profile()
 - delete_account()
 **Relationships**
-- One user can own multiple places
+- One user can own multiple placesThis entity supports pricing, location data, and amenity associations.
+
 - One user can submit multiple reviews
 ## 4. Place Entity
 The Place entity represents accommodation listings in the platform.
