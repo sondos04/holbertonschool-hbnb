@@ -34,3 +34,11 @@ The user sends a request to the API to retrieve places. The API forwards filteri
 Design Note
 Filtering logic is handled in the Business Logic layer to maintain separation of concerns.
 
+Summary
+These sequence diagrams demonstrate:
+•	Clear separation between layers
+•	Consistent request–response flow
+•	REST-compliant API behaviour
+They provide a concise reference for implementing and understanding API interactions within the HBnB system.
+
+
