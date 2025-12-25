@@ -11,10 +11,25 @@ The project emphasizes UML modeling, clean architectural design, and separation 
 
 This section presents the high-level package diagram for the HBnB Evolution application.
 The diagram illustrates the overall system architecture using a three-layer structure: Presentation Layer, Business Logic Layer, and Persistence Layer.
-It demonstrates how these layers communicate through the Facade Pattern, ensuring a clear separation of responsibilities.
-The diagram provides a conceptual overview and does not include implementation or database-specific details.
 
 ![HBnB High-Level Package Diagram](hbnb_package_diagram.png)
+
+
+The **Presentation Layer** is responsible for receiving requests from users or external clients and returning responses.
+It acts as the entry point to the system and does not contain any business rules or data storage logic.
+Its role is limited to handling input, forwarding requests to the Business Logic layer, and formatting the output sent back to the client.
+
+The **Business Logic Layer** contains the core rules and behaviors of the application.
+This layer coordinates operations between entities such as users, places, reviews, and amenities.
+It validates data, enforces business constraints, and ensures that system actions follow the defined rules.
+A Facade is used to provide a single access point from the Presentation Layer, simplifying communication and preventing direct dependency on internal components.
+
+The **Persistence Layer** handles data storage and retrieval.
+It is responsible for saving, updating, and fetching entities without exposing storage-specific details to other layers.
+By isolating persistence concerns, changes to the data source do not affect business logic or presentation behavior.
+
+This layered architecture improves modularity, maintainability, and scalability while ensuring a clear separation of responsibilities across the system.
+
 
 ---
 
@@ -143,8 +158,6 @@ The Amenity entity represents optional features or services associated with plac
 ## Sequence Diagrams
 
 This section presents the sequence diagrams for the HBnB Evolution application.  
-These diagrams illustrate how the Presentation Layer, Business Logic Layer, and Persistence Layer interact to handle key user operations.  
-Each sequence diagram represents a specific API use case and demonstrates the flow of requests and responses across the system layers.
 
 <p align="left">
   <img src="Sequence Diagrams User Registration.png" width="450">
@@ -152,6 +165,41 @@ Each sequence diagram represents a specific API use case and demonstrates the fl
   <img src="Sequence Diagrams Review Submission.png" width="450">
   <img src="Sequence Diagrams Fetching a List of Place.png" width="450">
 </p>
+
+### User Registration
+
+This sequence diagram illustrates the process of registering a new user in the HBnB system.
+The request is first received by the Presentation Layer, which forwards the user input to the Business Logic layer.
+The Business Logic layer validates the provided data, such as required fields and email uniqueness.
+Once validation is successful, a new User entity is created and passed to the Persistence Layer for storage.
+After the user is successfully saved, a confirmation response is returned to the client.
+
+
+### Place Creation
+
+This sequence diagram describes how a user creates a new place listing.
+The request is sent from the Presentation Layer to the Business Logic layer through the Facade.
+The Business Logic layer verifies user authorization and validates the provided place information.
+A new Place entity is created and stored by the Persistence Layer.
+Once the operation is completed, a success response is returned to the user.
+
+
+### Review Submission
+
+This sequence diagram shows how a user submits a review for a specific place.
+The request is passed from the Presentation Layer to the Business Logic layer.
+The Business Logic layer verifies that the place exists and validates the review data.
+After validation, a Review entity is created and saved by the Persistence Layer.
+The system then returns a confirmation response indicating that the review was successfully submitted.
+
+
+### Fetching a List of Places
+
+This sequence diagram illustrates how the system retrieves a list of places.
+The request is received by the Presentation Layer and forwarded to the Business Logic layer.
+The Business Logic layer processes the request and applies the necessary retrieval logic.
+The Persistence Layer retrieves the place data and returns it.
+Finally, the list of places is sent back to the user through the Presentation Layer.
 
 
 ---
