@@ -14,7 +14,7 @@ The diagram illustrates the overall system architecture using a three-layer stru
 It demonstrates how these layers communicate through the Facade Pattern, ensuring a clear separation of responsibilities.
 The diagram provides a conceptual overview and does not include implementation or database-specific details.
 
-![HBnB High-Level Package Diagram](part1/hbnb_package_diagram.png)
+![HBnB High-Level Package Diagram](hbnb_package_diagram.png)
 
 ---
 
@@ -24,7 +24,7 @@ This section documents the class diagram of the Business Logic layer for the HBn
 The diagram describes the core domain entities, their attributes, operations, and the relationships governing their interactions.
 It focuses on modeling fundamental business rules and behaviors independently of presentation and persistence concerns.
 
-![HBnB Business Logic Class Diagram](part1/Hbnb_Class_Diagram.png)
+![HBnB Business Logic Class Diagram](Hbnb_Class_Diagram.png)
 
 ---
 
@@ -147,10 +147,10 @@ These diagrams illustrate how the Presentation Layer, Business Logic Layer, and 
 Each sequence diagram represents a specific API use case and demonstrates the flow of requests and responses across the system layers.
 
 <p align="left">
-  <img src="part1/Sequence Diagrams User Registration.png" width="300">
-  <img src="part1/Sequence Diagrams Place Creation.png" width="300">
-  <img src="part1/Sequence Diagrams Review Submission.png" width="300">
-  <img src="part1/Sequence Diagrams Fetching a List of Place.png" width="300">
+  <img src="Sequence Diagrams User Registration.png" width="300">
+  <img src="Sequence Diagrams Place Creation.png" width="300">
+  <img src="Sequence Diagrams Review Submission.png" width="300">
+  <img src="Sequence Diagrams Fetching a List of Place.png" width="300">
 </p>
 
 
