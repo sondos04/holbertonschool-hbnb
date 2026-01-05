@@ -3,7 +3,7 @@ from app.models.user import User
 
 
 class Place(BaseModel):
-    """Represents a place in the HBnB application."""
+    """Represents a place in the HBnB"""
 
     def __init__(self, title, description, price, latitude, longitude, owner):
         super().__init__()
