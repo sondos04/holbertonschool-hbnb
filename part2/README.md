@@ -112,22 +112,15 @@ hbnb/
   pip install -r requirements.txt
 
 - Manually tested all endpoints using curl.
-
 - Verified successful operations and error scenarios.
-
 - Tested invalid input, missing fields, and non-existent IDs.
-
 - Ensured consistent JSON responses and correct HTTP status codes.
 
 ---
 
 ## **✅Testing Guidelines**
 - Install dependencies before running or testing the application.
-
 - Always include Content-Type: application/json for POST and PUT requests.
-
 - Use curl -i to inspect response headers and status codes.
-
 - Test both success and failure cases.
-
 - Ensure all endpoints return valid JSON.
