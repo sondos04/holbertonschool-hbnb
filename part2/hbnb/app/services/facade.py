@@ -80,7 +80,7 @@ class HBnBFacade:
 
 # ---------- Place methods ----------
 
-    def create_place(self, place_data):
+        def create_place(self, place_data):
         owner_id = place_data.get("owner_id")
         if not owner_id:
             raise ValueError("owner_id is required")
