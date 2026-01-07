@@ -11,6 +11,7 @@ The application enables the management of users, places, reviews, and amenities 
 ---
 
 ## 📂 Project Structure
+
 hbnb/
 ├── app/
 │   ├── __init__.py
@@ -38,7 +39,6 @@ hbnb/
 ├── config.py
 ├── requirements.txt
 ├── README.md
-
 
 ---
 
@@ -108,21 +108,23 @@ hbnb/
   ```bash
   pip install -r requirements.txt
 
-Manually tested all endpoints using curl.
+- Manually tested all endpoints using curl.
 
-Verified successful operations and error scenarios.
+- Verified successful operations and error scenarios.
 
-Tested invalid input, missing fields, and non-existent IDs.
+- Tested invalid input, missing fields, and non-existent IDs.
 
-Ensured consistent JSON responses and correct HTTP status codes.
+- Ensured consistent JSON responses and correct HTTP status codes.
 
-✅ Testing Guidelines
-Install dependencies before running or testing the application.
+---
 
-Always include Content-Type: application/json for POST and PUT requests.
+### **✅Testing Guidelines**
+- Install dependencies before running or testing the application.
 
-Use curl -i to inspect response headers and status codes.
+- Always include Content-Type: application/json for POST and PUT requests.
 
-Test both success and failure cases.
+- Use curl -i to inspect response headers and status codes.
 
-Ensure all endpoints return valid JSON.
+- Test both success and failure cases.
+
+- Ensure all endpoints return valid JSON.
