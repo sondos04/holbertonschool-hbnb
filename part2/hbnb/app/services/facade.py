@@ -74,7 +74,8 @@ class HBnBFacade:
         return amenity 
         
 # ---------- Place methods ----------
-def create_place(self, place_data):
+
+    def create_place(self, place_data):
     owner = self.user_repo.get(place_data.get("owner_id"))
     if not owner:
         raise ValueError("Owner not found")
@@ -88,8 +89,7 @@ def create_place(self, place_data):
         owner=owner
     )
 
-    amenity_ids = place_data.get("amenities", [])
-    for amenity_id in amenity_ids:
+    for amenity_id in place_data.get("amenities", []):
         amenity = self.amenity_repo.get(amenity_id)
         if amenity:
             place.add_amenity(amenity)
@@ -111,10 +111,37 @@ def update_place(self, place_id, place_data):
     if not place:
         return None
 
-    allowed = {"title", "description", "price", "latitude", "longitude"}
-    for key, value in place_data.items():
-        if key in allowed:
-            setattr(place, key, value)
+    if "title" in place_data:
+        title = place_data["title"]
+        if not isinstance(title, str) or not title.strip():
+            raise ValueError("title must be a non-empty string")
+        if len(title.strip()) > 100:
+            raise ValueError("title must be at most 100 characters")
+        place.title = title.strip()
+
+    if "description" in place_data:
+        description = place_data["description"]
+        if not isinstance(description, str):
+            raise TypeError("description must be a string")
+        place.description = description.strip()
+
+    if "price" in place_data:
+        price = place_data["price"]
+        if not isinstance(price, (int, float)) or price < 0:
+            raise ValueError("price must be a non-negative number")
+        place.price = float(price)
+
+    if "latitude" in place_data:
+        latitude = place_data["latitude"]
+        if not isinstance(latitude, (int, float)) or not -90 <= latitude <= 90:
+            raise ValueError("latitude must be between -90 and 90")
+        place.latitude = float(latitude)
+
+    if "longitude" in place_data:
+        longitude = place_data["longitude"]
+        if not isinstance(longitude, (int, float)) or not -180 <= longitude <= 180:
+            raise ValueError("longitude must be between -180 and 180")
+        place.longitude = float(longitude)
 
     if "amenities" in place_data:
         place.amenities.clear()
