@@ -40,18 +40,23 @@ body_only() {
 
 
 json_get() {
-  # usage: echo "$json" | json_get key
   local key="$1"
-  python3 - <<PY
-import sys, json
-data = sys.stdin.read().strip()
-try:
-    obj = json.loads(data)
-except Exception as e:
+  python3 - <<'PY'
+import sys, json, re
+
+text = sys.stdin.read()
+
+# extract first JSON object
+m = re.search(r'\{.*\}', text, re.S)
+if not m:
     print("")
     sys.exit(0)
-val = obj.get("$key", "")
-print(val if val is not None else "")
+
+try:
+    obj = json.loads(m.group(0))
+    print(obj.get(sys.argv[1], ""))
+except Exception:
+    print("")
 PY
 }
 
