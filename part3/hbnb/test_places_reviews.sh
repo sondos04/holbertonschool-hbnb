@@ -112,7 +112,7 @@ if [[ "$CODE" != "201" && "$CODE" != "200" ]]; then
   exit 1
 fi
 echo "POST /users/ ($CODE)"
-USER_ID="$(printf "%s" "$BODY" | json_get id)"
+USER_ID="$(printf "%s" "$BODY" | python3 -c 'import sys, json; print(json.load(sys.stdin)["id"])')"
 if [[ -z "$USER_ID" ]]; then
   echo "Could not extract USER_ID from response body:"
   echo "$BODY"
