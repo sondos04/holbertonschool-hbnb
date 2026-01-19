@@ -26,14 +26,18 @@ req() {
 }
 
 status_code() {
-  # read HTTP status code from response headers
-  awk 'BEGIN{code=""} /^HTTP\/1\.[01]/{code=$2} END{print code}'
+  awk 'BEGIN{code=""}
+       /^HTTP\/1\.[01]/{gsub("\r",""); code=$2}
+       END{print code}'
 }
 
 body_only() {
-  # strip headers, keep body
-  awk 'BEGIN{h=1} { if(h && $0=="") {h=0; next} if(!h) print }'
+  awk 'BEGIN{h=1}
+       {sub("\r$","")}
+       { if(h && $0=="") {h=0; next} }
+       { if(!h) print }'
 }
+
 
 json_get() {
   # usage: echo "$json" | json_get key
