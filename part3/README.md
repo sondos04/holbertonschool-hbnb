@@ -46,51 +46,49 @@ based strictly on the implemented project files.
 ```
 part3/
 └── hbnb/
-    ├── app/
-    │   │
-    │   ├── api/
-    │   │   ├── __init__.py
-    │   │
-    │   │   └── v1/
-    │   │       ├── __init__.py
-    │   │       ├── users.py
-    │   │       ├── places.py
-    │   │       ├── review.py
-    │   │       ├── amenities.py
-    │   │       └── auth.py
-    │   │
-    │   ├── models/
-    │   │   ├── __init__.py
-    │   │   ├── base_model.py
-    │   │   ├── user.py
-    │   │   ├── place.py
-    │   │   ├── amenity.py
-    │   │   ├── review.py
-    │   │   └── validation.py
-    │   │
-    │   ├── repositories/
-    │   │   ├── __init__.py
-    │   │   ├── in_memory_repository.py
-    │   │   └── sqlalchemy_repository.py
-    │   │
-    │   ├── services/
-    │   │   ├── __init__.py
-    │   │   └── facade.py
-    │   └── __init__.py
-    │   │
-    ├── sql/
-    │   ├── create_tables.sql
-    │   └── insert_admin.sql
-    │
-    ├── run.py
-    ├── config.py
-    ├── requirements.txt
-    ├── README.md
-    ├── simple_test_report.md
-    ├── test_models.py
-    ├── test_users.sh
-    └── test_amenities_places.sh
-
+│   ├── app/
+│   │   ├── api/
+│   │   │   └── init.py
+│   │   │   └── v1/
+│   │   │       ├── users.py
+│   │   │       ├── places.py
+│   │   │       ├── review.py
+│   │   │       ├── amenities.py
+│   │   │       ├── auth.py
+│   │   │       └── init.py
+│   │   ├── models/
+│   │   │   ├── init.py
+│   │   │   ├── base_model.py
+│   │   │   ├── user.py
+│   │   │   ├── place.py
+│   │   │   ├── amenity.py
+│   │   │   └── review.py
+│   │   ├── db/
+│   │   │   ├── database.py
+│   │   │   └── session.py
+│   │   ├── repositories/
+│   │   │   ├── amenity_repository.py 
+│   │   │   ├── place_repository.py
+│   │   │   ├── review_repository.py
+│   │   │   ├── sqlalchemy_repository.py
+│   │   │   ├── user_repository.py
+│   │   │   └── init.py
+│   │   ├── services/
+│   │   │   ├── init.py
+│   │   │   └── facade.py
+│   │   └── init.py
+│   ├── sql/
+│   │   ├── create_tables.sql
+│   │   ├── insert_admin.sql
+│   │   └── insert_amenities.sql
+│   ├── run.py
+│   ├── config.py
+│   ├── requirements.txt
+│   ├── test_amenities.sh
+│   ├── test_places_reviews.sh
+│   └── README.md
+│
+└── README.md
 ```
 ---
 ## SQL and Database Files
