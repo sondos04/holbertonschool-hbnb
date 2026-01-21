@@ -1,26 +1,16 @@
-from app.models.base_model import BaseModel, Base
+from sqlalchemy import Column, String
+from app.models.base_model import Base, BaseModel
 
 
-class Amenity(BaseModel):
-    def __init__(self, name):
-        super().__init__()
+class Amenity(Base, BaseModel):
+    __tablename__ = "amenities"
 
-        if not isinstance(name, str):
-            raise TypeError("name must be a string.")
-
-        name = name.strip()
-        if not name:
-            raise ValueError("amenity name is required.")
-
-        if len(name) > 50:
-            raise ValueError("amenity name must be at most 50 characters.")
-
-        self.name = name
+    name = Column(String(50), nullable=False, unique=True)
 
     def to_dict(self):
         return {
             "id": self.id,
             "name": self.name,
-            "created_at": self.created_at.isoformat(),
-            "updated_at": self.updated_at.isoformat(),
+            "created_at": self.created_at.isoformat() if self.created_at else None,
+            "updated_at": self.updated_at.isoformat() if self.updated_at else None,
         }
