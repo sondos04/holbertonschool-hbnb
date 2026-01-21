@@ -1,10 +1,5 @@
 #!/bin/bash
 
-echo "Starting HBnB server..."
-python3 run.py &
-SERVER_PID=$!
-sleep 3
-
 echo
 echo "------------------------------"
 echo "TEST 1: Create Amenity (POST)"
@@ -43,7 +38,3 @@ echo "------------------------------"
 
 curl -s http://127.0.0.1:5000/api/v1/amenities/
 echo
-
-echo
-echo "Stopping server..."
-kill $SERVER_PID
