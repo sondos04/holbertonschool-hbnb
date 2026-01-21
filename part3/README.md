@@ -93,29 +93,32 @@ part3/
 ---
 ## SQL and Database Files
 
-### - `repositories/sqlalchemy_repository.py`
-Handles database operations using SQLAlchemy.
-It is responsible for saving, retrieving, and updating data in the database,
-replacing in-memory storage with persistent SQL-based storage.
+- `repositories/sqlalchemy_repository.py`
 
-### - `api/v1/auth.py`
-Manages authentication-related API endpoints.
-It verifies user credentials using stored database data and prepares
-the application for secure access.
+  Handles database operations using SQLAlchemy.
+  It is responsible for saving, retrieving, and updating data in the database, replacing in-memory storage with persistent SQL-based storage.
 
-### - `sql/create_tables.sql`
-Contains SQL statements used to create the database tables
-and define the schema structure.
+- `api/v1/auth.py`
 
-### - `sql/insert_admin.sql`
-Provides initial SQL data for the database,
-such as inserting a default or administrative user.
+  Manages authentication-related API endpoints.
+  It verifies user credentials using stored database data and prepares the application for secure access.
 
-### - Database Integration (`db`)
-The database layer is responsible for establishing the connection,
-managing sessions, and ensuring data is stored persistently.
-It acts as the foundation that links the application logic
-with the SQL database.
+- `sql/create_tables.sql`
+
+  Contains SQL statements used to create the database tables and define the schema structure.
+
+- `sql/insert_admin.sql`
+
+  Provides initial SQL data for the database, such as inserting a default or administrative user.
+
+- `sql/insert_amenities.sql`
+
+  Provides initial SQL data for the database, such as inserting predefined amenity records.
+
+- `Database Integration (db)`
+
+  The database layer is responsible for establishing the connection, managing sessions, and ensuring data is stored persistently.
+  It acts as the foundation that links the application logic with the SQL database.
 
 ---
 
