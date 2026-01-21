@@ -192,6 +192,46 @@ python3 run.py
 http://127.0.0.1:5000/api/v1/
 ```
 ---
+## Test Results
+
+This section presents the results of the executed tests for the main system entities.  
+All tests were performed after completing the database integration in Part 3 to ensure correct persistence, validation, and API behavior.
+
+---
+
+### 1. User Tests
+
+![5](https://github.com/user-attachments/assets/590dbbef-0db9-4d0b-8b96-3e8cc10e0fb8)
+![6](https://github.com/user-attachments/assets/531e4c22-571e-4ed9-95a4-986e029aa9ac)
+
+
+---
+
+### 2. Place & Review Tests
+
+![1](https://github.com/user-attachments/assets/16eaa084-f50d-4793-9409-5aea3a640782)
+![2](https://github.com/user-attachments/assets/a51d2c2f-7fad-4a54-81ca-d280ec194493)
+
+
+---
+
+### 3. Amenity Tests
+
+![3](https://github.com/user-attachments/assets/cc2dfa3e-6a3a-4daf-8196-cacf69ed7ba2)
+![4](https://github.com/user-attachments/assets/e8c6128f-0dba-4e39-9f38-3483b2f26cf2)
+
+
+---
+
+## Summary
+
+The test results confirm that:
+- The application correctly persists data using the database
+- Entity relationships are properly enforced
+- Business rules are applied as expected
+- API endpoints behave consistently with the project specifications
+
+---
 ### Key Improvements from Part 2
 
 - Introduction of database-backed persistence
