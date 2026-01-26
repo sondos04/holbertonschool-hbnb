@@ -163,7 +163,7 @@ Install dependencies using:
 pip install -r requirements.txt
 ```
 
-### Running the Application
+## Running the Application
 Start the Flask server locally:
 
 ``` 
@@ -176,7 +176,7 @@ The project includes two shell scripts for automated API testing:
 - `test_amenities_places.sh` tests functionality implemented in Tasks 4, 5, and 6 (Amenity and Place operations).
 
 --- 
-### Execute the scripts as follows:
+## Execute the scripts as follows:
 ```
 ./test_users.sh
 ./test_amenities_places.sh
