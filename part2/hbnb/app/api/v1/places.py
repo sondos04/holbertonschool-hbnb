@@ -123,3 +123,13 @@ class Place(Resource):
             return _place_full(place), 200
         except (TypeError, ValueError) as e:
             api.abort(400, str(e))
+            @api.route('/<string:place_id>/reviews')
+class PlaceReviews(Resource):
+
+    def get(self, place_id):
+        """Get all reviews for a specific place"""
+        reviews = facade.get_reviews_by_place(place_id)
+        if reviews is None:
+            api.abort(404, "Place not found")
+        return [r.to_dict() for r in reviews], 200
+
