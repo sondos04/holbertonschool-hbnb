@@ -1,3 +1,5 @@
+# app/api/v1/users.py
+
 from flask_restx import Resource, Namespace, fields
 from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
 from app.services.facade import facade
@@ -35,13 +37,12 @@ def require_admin():
 
 @api.route("/")
 class Users(Resource):
-
-    @api.expect(user_model)
+    @api.expect(user_model, validate=True)
     @api.marshal_with(user_response_model, code=201)
     @jwt_required()
     def post(self):
         require_admin()
-        data = api.payload
+        data = api.payload or {}
         try:
             user = facade.create_user(
                 email=data["email"],
@@ -62,7 +63,6 @@ class Users(Resource):
 
 @api.route("/<string:user_id>")
 class User(Resource):
-
     @api.marshal_with(user_response_model)
     def get(self, user_id):
         user = facade.user_repo.get_by_id(user_id)
@@ -70,7 +70,7 @@ class User(Resource):
             api.abort(404, "User not found")
         return user, 200
 
-    @api.expect(update_user_model)
+    @api.expect(update_user_model, validate=True)
     @api.marshal_with(user_response_model)
     @jwt_required()
     def put(self, user_id):
@@ -78,8 +78,9 @@ class User(Resource):
         is_admin = claims.get("is_admin", False)
         current_user_id = get_jwt_identity()
 
+        # حسب التوثيق: 403 Unauthorized action إذا يحاول يعدّل غيره
         if not is_admin and current_user_id != user_id:
-            api.abort(403, "Forbidden")
+            api.abort(403, "Unauthorized action")
 
         user = facade.user_repo.get_by_id(user_id)
         if not user:
@@ -87,11 +88,17 @@ class User(Resource):
 
         data = api.payload or {}
 
-        if "first_name" in data:
+        # اليوزر العادي ممنوع يعدّل email/password
+        if not is_admin and (("email" in data and data["email"]) or ("password" in data and data["password"])):
+            api.abort(400, "You cannot modify email or password")
+
+        # allowed for everyone (self/admin)
+        if "first_name" in data and data["first_name"] is not None:
             user.first_name = data["first_name"]
-        if "last_name" in data:
+        if "last_name" in data and data["last_name"] is not None:
             user.last_name = data["last_name"]
 
+        # admin-only fields
         if is_admin:
             if "email" in data and data["email"]:
                 existing = facade.user_repo.get_by_email(data["email"])
