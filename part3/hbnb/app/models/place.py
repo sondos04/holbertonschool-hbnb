@@ -2,18 +2,23 @@ from app.extensions import db
 from app.models.base_model import BaseModel
 
 
-class Place(BaseModel):
-    tablename = "places"
+# Association table (Place <-> Amenity) — مدموج هنا بدون ملف جديد
+place_amenity = db.Table(
+    "place_amenity",
+    db.Column("place_id", db.String(36), db.ForeignKey("places.id"), primary_key=True),
+    db.Column("amenity_id", db.String(36), db.ForeignKey("amenities.id"), primary_key=True),
+)
 
-    # Basic fields
+
+class Place(BaseModel):
+    __tablename__ = "places"
+
     title = db.Column(db.String(100), nullable=False)
-    description = db.Column(db.String(1024), default="")
+    description = db.Column(db.String(1024), default="", nullable=False)
     price_per_night = db.Column(db.Float, default=0.0, nullable=False)
 
-    # Owner
     owner_id = db.Column(db.String(36), db.ForeignKey("users.id"), nullable=False)
 
-    # Relationships
     owner = db.relationship("User", back_populates="places")
 
     reviews = db.relationship(
@@ -24,7 +29,7 @@ class Place(BaseModel):
 
     amenities = db.relationship(
         "Amenity",
-        secondary="place_amenity",
+        secondary="place_amenity",   # string name (بدون import)
         back_populates="places"
     )
 
@@ -40,13 +45,9 @@ class Place(BaseModel):
         }
 
         if include_amenities:
-            data["amenities"] = [
-                {"id": a.id, "name": a.name} for a in (self.amenities or [])
-            ]
+            data["amenities"] = [{"id": a.id, "name": a.name} for a in (self.amenities or [])]
 
         if include_reviews:
-            data["reviews"] = [
-                r.to_dict() for r in (self.reviews or [])
-            ]
+            data["reviews"] = [r.to_dict() for r in (self.reviews or [])]
 
         return data
