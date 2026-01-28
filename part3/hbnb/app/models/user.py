@@ -1,26 +1,25 @@
-from sqlalchemy import Column, String, Boolean
-from sqlalchemy.orm import relationship
-from app.models.base_model import Base, BaseModel
-from app.extensions import bcrypt
+from app.extensions import db, bcrypt
+from app.models.base_model import BaseModel
 
 
-class User(Base, BaseModel):
+class User(BaseModel):
     __tablename__ = "users"
 
-    email = Column(String(128), nullable=False, unique=True)
-    password = Column(String(128), nullable=False)
-    first_name = Column(String(128), nullable=True)
-    last_name = Column(String(128), nullable=True)
-    is_admin = Column(Boolean, default=False)
+    email = db.Column(db.String(128), nullable=False, unique=True)
+    password = db.Column(db.String(128), nullable=False)
+    first_name = db.Column(db.String(128), nullable=True)
+    last_name = db.Column(db.String(128), nullable=True)
+    is_admin = db.Column(db.Boolean, default=False)
 
-    def set_password(self, password):
+    # Relationships
+    places = db.relationship("Place", back_populates="owner", cascade="all, delete-orphan")
+    reviews = db.relationship("Review", back_populates="user", cascade="all, delete-orphan")
+
+    def set_password(self, password: str):
         self.password = bcrypt.generate_password_hash(password).decode("utf-8")
 
-    def check_password(self, password):
+    def check_password(self, password: str) -> bool:
         return bcrypt.check_password_hash(self.password, password)
-
-    places = relationship("Place", back_populates="owner", cascade="all, delete-orphan")
-    reviews = relationship("Review", back_populates="user", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
