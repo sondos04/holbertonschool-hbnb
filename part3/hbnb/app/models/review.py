@@ -3,22 +3,19 @@ from app.models.base_model import BaseModel
 
 
 class Review(BaseModel):
-    tablename = "reviews"
+    __tablename__ = "reviews"
 
     text = db.Column(db.String(1000), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
 
-    # FK
     user_id = db.Column(db.String(36), db.ForeignKey("users.id"), nullable=False)
     place_id = db.Column(db.String(36), db.ForeignKey("places.id"), nullable=False)
 
-    # Constraint: user can review a place only once
-    table_args = (
+    __table_args__ = (
         db.UniqueConstraint("user_id", "place_id", name="uq_review_user_place"),
         db.CheckConstraint("rating >= 1 AND rating <= 5", name="ck_review_rating_1_5"),
     )
 
-    # Relationships
     user = db.relationship("User", back_populates="reviews")
     place = db.relationship("Place", back_populates="reviews")
 
