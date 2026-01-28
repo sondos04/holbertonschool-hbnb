@@ -1,12 +1,6 @@
 from app.extensions import db
 
-
 class SQLAlchemyRepository:
-    """
-    Generic SQLAlchemy repository.
-    Provides basic CRUD operations using Flask-SQLAlchemy.
-    """
-
     def __init__(self, model):
         self.model = model
 
@@ -16,7 +10,8 @@ class SQLAlchemyRepository:
         return obj
 
     def get_by_id(self, obj_id):
-        return self.model.query.get(obj_id)
+        # بدل Query.get (Legacy) استخدم Session.get
+        return db.session.get(self.model, obj_id)
 
     def get_all(self):
         return self.model.query.all()
