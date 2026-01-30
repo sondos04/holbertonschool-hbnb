@@ -51,12 +51,30 @@ class HBnBFacade:
         if not owner:
             raise ValueError("Owner not found")
 
+    # --- latitude/longitude validation ---
+        lat = place_data.get("latitude")
+        lon = place_data.get("longitude")
+
+        if lat is None or lon is None:
+            raise ValueError("Latitude and longitude are required")
+
+        try:
+            lat = float(lat)
+            lon = float(lon)
+        except (TypeError, ValueError):
+            raise ValueError("Latitude and longitude must be valid numbers")
+
+        if not (-90 <= lat <= 90):
+            raise ValueError("Latitude must be between -90 and 90")
+        if not (-180 <= lon <= 180):
+            raise ValueError("Longitude must be between -180 and 180")
+
         place = Place(
             title=title,
             description=(place_data.get("description") or ""),
             price_per_night=float(place_data.get("price_per_night") or 0.0),
-            latitude=place_data.get("latitude"),
-            longitude=place_data.get("longitude"),
+            latitude=lat,
+            longitude=lon,
             owner_id=owner_id,
         )
         return self.place_repo.add(place)
