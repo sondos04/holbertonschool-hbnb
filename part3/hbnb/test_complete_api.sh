@@ -395,8 +395,6 @@ echo ""
 
 echo -e "${GREEN}  ALL TESTS COMPLETED SUCCESSFULLY!${NC}"
 echo ""
-echo "Test Results: 20/20 "
-echo ""
 echo "Summary:"
 echo -e "  ${BLUE}Users:${NC}"
 echo "    - Admin ID: 13a59c34-4562-4e4b-b1f8-7b4938effb73"
