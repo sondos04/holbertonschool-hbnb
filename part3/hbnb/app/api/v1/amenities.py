@@ -54,7 +54,7 @@ class AmenityResource(Resource):
             amenity = facade.update_amenity(amenity_id, api.payload or {})
             return amenity.to_dict(), 200
         except ValueError as e:
-            # إذا "Amenity not found" -> 404 ، غيره غالبًا 400
+
             msg = str(e)
             if msg == "Amenity not found":
                 api.abort(404, msg)
