@@ -18,9 +18,7 @@ class HBnBFacade:
         self.review_repo = ReviewRepository()
         self.amenity_repo = AmenityRepository()
 
-    # ======================
-    # Users
-    # ======================
+    
     def create_user(self, email, password, first_name=None, last_name=None, is_admin=False):
         if not email or not password:
             raise ValueError("Email and password are required")
@@ -38,9 +36,7 @@ class HBnBFacade:
         user.set_password(password)
         return self.user_repo.add(user)
 
-    # ======================
-    # Places
-    # ======================
+    
     def create_place(self, place_data: dict):
         title = (place_data.get("title") or "").strip()
         if not title:
@@ -51,7 +47,7 @@ class HBnBFacade:
         if not owner:
             raise ValueError("Owner not found")
 
-    # --- latitude/longitude validation ---
+    
         lat = place_data.get("latitude")
         lon = place_data.get("longitude")
 
@@ -85,9 +81,7 @@ class HBnBFacade:
     def get_place(self, place_id):
         return self.place_repo.get_by_id(place_id)
 
-    # ======================
-    # Reviews
-    # ======================
+    
     def create_review(self, review_data: dict):
         text = (review_data.get("text") or "").strip()
         if not text:
@@ -135,9 +129,7 @@ class HBnBFacade:
     def get_review(self, review_id):
         return self.review_repo.get_by_id(review_id)
 
-    # ======================
-    # Amenities
-    # ======================
+    
     def create_amenity(self, amenity_data: dict):
         name = (amenity_data.get("name") or "").strip()
         if not name:
