@@ -217,7 +217,6 @@ All tests were performed after completing the database integration in Part 3 to 
 ---
 
 
-<img src="https://github.com/user-attachments/assets/cc2dfa3e-6a3a-4daf-8196-cacf69ed7ba2" alt="Amenity Test 1" width="450">
 
 <img src="https://github.com/user-attachments/assets/e8c6128f-0dba-4e39-9f38-3483b2f26cf2" alt="Amenity Test 2" width="450">
 
