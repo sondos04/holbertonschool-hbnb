@@ -78,7 +78,6 @@ class User(Resource):
         is_admin = claims.get("is_admin", False)
         current_user_id = get_jwt_identity()
 
-        # حسب التوثيق: 403 Unauthorized action إذا يحاول يعدّل غيره
         if not is_admin and current_user_id != user_id:
             api.abort(403, "Unauthorized action")
 
@@ -88,17 +87,14 @@ class User(Resource):
 
         data = api.payload or {}
 
-        # اليوزر العادي ممنوع يعدّل email/password
         if not is_admin and (("email" in data and data["email"]) or ("password" in data and data["password"])):
             api.abort(400, "You cannot modify email or password")
 
-        # allowed for everyone (self/admin)
         if "first_name" in data and data["first_name"] is not None:
             user.first_name = data["first_name"]
         if "last_name" in data and data["last_name"] is not None:
             user.last_name = data["last_name"]
 
-        # admin-only fields
         if is_admin:
             if "email" in data and data["email"]:
                 existing = facade.user_repo.get_by_email(data["email"])
