@@ -33,7 +33,7 @@ class Places(Resource):
         current_user_id = get_jwt_identity()
 
         payload = api.payload or {}
-        payload["owner_id"] = current_user_id  # enforce owner from token
+        payload["owner_id"] = current_user_id
 
         try:
             place = facade.create_place(payload)
@@ -75,7 +75,6 @@ class PlaceResource(Resource):
         if "price_per_night" in data and data["price_per_night"] is not None:
             place.price_per_night = data["price_per_night"]
 
-        # ✅ Added latitude & longitude updates
         if "latitude" in data and data["latitude"] is not None:
             place.latitude = data["latitude"]
 
