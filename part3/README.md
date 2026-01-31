@@ -1,5 +1,3 @@
-<img width="1920" height="1080" alt="amenities 1" src="https://github.com/user-attachments/assets/02359d24-2d85-4762-bb0a-32253f816a09" /># HBnB – part3 : Database Integration and Persistence
-
 This project represents **Part 3** of the HBnB (Holberton Bed & Breakfast) application.  
 In this phase, the system transitions from **in-memory data storage** to a **database-backed persistence layer** using a relational database.
 
@@ -225,13 +223,11 @@ All tests were performed after completing the database integration in Part 3 to 
 
 ---
 
-### 2. Place & Review Tests
+### 2. Place Tests
 
+<img src="https://github.com/user-attachments/assets/72a80cde-87a3-48e4-be20-8b6be8fc5e30" alt="Place Test 1" width="450">
 
-
-<img src="https://github.com/user-attachments/assets/16eaa084-f50d-4793-9409-5aea3a640782" alt="Place Test" width="450">
-
-<img src="https://github.com/user-attachments/assets/a51d2c2f-7fad-4a54-81ca-d280ec194493" alt="Review Test" width="450">
+<img  src="https://github.com/user-attachments/assets/d00d851e-01b1-4eb7-8800-245c8b09873b" alt="Place Test 2" width="450">
 
 ---
 
@@ -241,6 +237,12 @@ All tests were performed after completing the database integration in Part 3 to 
 
 <img  src="https://github.com/user-attachments/assets/9db6f830-8f78-4979-8d33-b55083b60c26" alt="Amenity Test 2" width="450">
 
+---
+
+### 4. Review Tests
+ <img src="https://github.com/user-attachments/assets/a7bd0b50-cf52-4ed6-b1e8-63ef0998edf3" alt="Review Test 1" width="450">
+
+<img src="https://github.com/user-attachments/assets/4a2b6717-8e8c-4ac5-8638-ae6f9667f8dd"  alt="Review Test 2" width="450">
 
 ---
 
