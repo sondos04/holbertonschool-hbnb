@@ -199,7 +199,6 @@ This section presents the results of the executed tests for the main system enti
 All tests were performed after completing the database integration in Part 3 to ensure correct persistence, validation, and API behavior.
 
 ---
-### 1. User Tests
 
 <img src="https://github.com/user-attachments/assets/590dbbef-0db9-4d0b-8b96-3e8cc10e0fb8" alt="User Test 1" width="450">
 
