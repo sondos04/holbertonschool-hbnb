@@ -1,9 +1,9 @@
 # Holbertonschool-Hbnb Project
 
-HBnB Evolution is a technical documentation project focused on designing the architecture of a simplified Airbnb-like application.  
-The objective of this project is to define a clear system structure using a layered architecture approach before moving into the implementation phase.  
-This documentation serves as a foundational blueprint that explains how different components of the system are organized and how they interact with each other.  
-Emphasis is placed on UML modeling, clean architectural design, and separation of concerns.
+HBnB Evolution is a technical documentation project that focuses on designing the architecture of a simplified Airbnb-like application.
+The goal of this project is to establish a clear and well-structured system using a layered architectural approach prior to implementation.
+This documentation acts as a foundational blueprint, outlining how the system’s components are organized and how they interact with one another.
+The project emphasizes UML modeling, clean architectural principles, and a strong separation of concerns.
 
 ---
 # Part 1 – System Architecture and Design
