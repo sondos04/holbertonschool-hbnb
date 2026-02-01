@@ -166,8 +166,7 @@ chmod +x test_complete_api.sh
 ---
 ## Database Design – ER Diagram
 
-The ER Diagram below illustrates how **Users, Places, Reviews, and Amenities** are related, including primary keys, foreign keys, and association tables.
-
+The ER diagram below illustrates the relationships between Users, Places, Reviews, and Amenities, highlighting primary keys, foreign keys, and the association tables that define how these entities are connected within the system.
 <img src="part3/ER_diagram.png" width="500">
 
 ---
