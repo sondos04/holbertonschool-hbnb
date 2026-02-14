@@ -3,6 +3,7 @@
 from flask_restx import Resource, Namespace, fields
 from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
 from app.services.facade import facade
+from app.extensions import db
 
 api = Namespace("users", description="User operations")
 
@@ -33,6 +34,30 @@ def require_admin():
     claims = get_jwt()
     if not claims.get("is_admin", False):
         api.abort(403, "Admin privileges required")
+
+
+
+@api.route("/signup")
+class Signup(Resource):
+    @api.expect(user_model, validate=True)
+    @api.marshal_with(user_response_model, code=201)
+    def post(self):
+        """تسجيل مستخدم جديد - بدون الحاجة لـ token"""
+        data = api.payload or {}
+        try:
+            user = facade.create_user(
+                email=data["email"],
+                password=data["password"],
+                first_name=data.get("first_name"),
+                last_name=data.get("last_name"),
+            )
+            db.session.commit()   
+            print(f"DEBUG: Created user: {user.id}")  
+            return user, 201
+        except ValueError as e:
+            api.abort(400, str(e))
+        except Exception as e:
+            api.abort(500, f"Error: {str(e)}")
 
 
 @api.route("/")
