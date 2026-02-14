@@ -3,7 +3,7 @@ from app.models.base_model import BaseModel
 
 
 class User(BaseModel):
-    __tablename__ = "users"
+    tablename = "users"
 
     email = db.Column(db.String(128), nullable=False, unique=True)
     password = db.Column(db.String(128), nullable=False)
