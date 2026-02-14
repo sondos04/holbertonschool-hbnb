@@ -42,8 +42,9 @@ class Place(BaseModel):
 
     amenities = db.relationship(
         "Amenity",
-        secondary=place_amenity,
-        back_populates="places"
+        secondary='place_amenity',
+        backref='places',
+        foreign_keys='[place_amenity.c.amenity_id]'
     )
 
     def to_dict(self, include_amenities=True, include_reviews=False):
