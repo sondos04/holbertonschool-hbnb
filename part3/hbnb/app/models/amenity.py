@@ -9,7 +9,7 @@ class Amenity(BaseModel):
 
     places = db.relationship(
         "Place",
-        secondary="place_amenity",
+        secondary=place_amenity,
         back_populates="amenities"
     )
 
