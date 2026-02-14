@@ -17,7 +17,7 @@ token_model = api.model("Token", {
 @api.route("/login")
 class Login(Resource):
 
-    @api.expect(login_model, validate=True)  
+    @api.expect(login_model, validate=True)
     @api.marshal_with(token_model)
     def post(self):
         data = api.payload or {}
@@ -33,7 +33,7 @@ class Login(Resource):
             api.abort(401, "Invalid email or password")
 
         access_token = create_access_token(
-            identity=user.id,
+            identity=str(user.id),
             additional_claims={"is_admin": user.is_admin}
         )
 
