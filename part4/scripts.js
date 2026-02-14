@@ -173,3 +173,43 @@ function createPlaceCard(place) {
         </div>
     `;
 }
+async function displayPlaces() {
+    const container = document.getElementById('places-list');
+    if (!container) return;
+    await displayPlacesInContainer(container, 'price-filter');
+}
+
+async function displayPlacesInContainer(container, filterElementId) {
+    if (!container) return;
+
+    try {
+        const places = await fetchPlaces();
+
+        if (!places || places.length === 0) {
+            container.innerHTML = '<div class="col-span-full text-center py-12 text-gray-600">No places available</div>';
+            return;
+        }
+
+        function renderPlaces(list) {
+            container.innerHTML = list.map(p => createPlaceCard(p)).join('');
+            setupFavorites();
+        }
+
+        renderPlaces(places);
+
+        const filter = document.getElementById(filterElementId);
+        if (filter) {
+            filter.addEventListener('change', (e) => {
+                const val = e.target.value;
+                if (val === 'all') {
+                    renderPlaces(places);
+                } else {
+                    const filtered = places.filter(p => p.price_per_night <= Number(val));
+                    renderPlaces(filtered);
+                }
+            });
+        }
+    } catch (error) {
+        container.innerHTML = '<div class="col-span-full text-center py-12 text-red-600">Error loading places</div>';
+    }
+}
