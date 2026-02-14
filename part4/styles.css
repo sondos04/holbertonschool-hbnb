@@ -338,6 +338,6 @@ select:focus {
   background-color: transparent !important;
 }
 
-/* Tailwind gradient overrides -> Lavender */
+
 .from-purple-600 { --tw-gradient-from: var(--lavender) !important; }
 .to-purple-800   { --tw-gradient-to: var(--lavender-darker) !important; }
