@@ -50,3 +50,126 @@ function updateAuthUI() {
         }
     }
 }
+
+function setupLogout() {
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            deleteCookie('token');
+            localStorage.removeItem('userEmail');
+            window.location.href = 'index.html';
+        });
+    }
+}
+
+// ========== Login ==========
+async function handleLogin(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const errorMsg = document.getElementById('error-msg');
+
+    try {
+        const response = await fetch(`${API_URL}/auth/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.access_token) {
+            setCookie('token', data.access_token, 7);
+            localStorage.setItem('userEmail', email);
+            window.location.href = 'index.html';
+        } else {
+            if (errorMsg) errorMsg.textContent = data.message || 'Invalid credentials';
+        }
+    } catch (error) {
+        if (errorMsg) errorMsg.textContent = 'Connection error';
+    }
+}
+
+function setupLoginForm() {
+    const form = document.getElementById('login-form');
+    if (form) {
+        form.addEventListener('submit', handleLogin);
+    }
+}
+
+// ========== Places ==========
+async function fetchPlaces() {
+    try {
+        const response = await fetch(`${API_URL}/places/`);
+        if (!response.ok) throw new Error('Failed');
+        return await response.json();
+    } catch (error) {
+        return [];
+    }
+}
+
+function getPlaceImage(placeId) {
+    const images = [
+        'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600',
+        'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600',
+        'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600',
+        'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600',
+        'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600'
+    ];
+    const hash = placeId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    return images[hash % images.length];
+}
+
+function getAmenitiesIcons(amenities) {
+    if (!amenities || amenities.length === 0) return '';
+    
+    const iconMap = {
+        'WiFi': 'fa-wifi',
+        'Pool': 'fa-swimming-pool',
+        'Parking': 'fa-car',
+        'Breakfast': 'fa-coffee',
+        'Gym': 'fa-dumbbell',
+        'AC': 'fa-snowflake'
+    };
+
+    return amenities.slice(0, 4).map(a => {
+        const icon = iconMap[a.name] || 'fa-check';
+        return `<div class="flex items-center gap-2 text-sm text-gray-600">
+            <i class="fas ${icon} text-purple-600"></i>
+            <span>${a.name}</span>
+        </div>`;
+    }).join('');
+}
+
+function createPlaceCard(place) {
+    const isFavorite = localStorage.getItem(`fav_${place.id}`) === 'true';
+    const heartClass = isFavorite ? 'fas' : 'far';
+
+    return `
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition relative">
+            <button class="absolute top-3 right-3 z-10 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition favorite-btn" data-id="${place.id}">
+                <i class="${heartClass} fa-heart text-red-500 text-xl"></i>
+            </button>
+            
+            <img src="${getPlaceImage(place.id)}" class="w-full h-48 object-cover" alt="${place.title}">
+            
+            <div class="p-4">
+                <h3 class="text-xl font-bold mb-2">${place.title}</h3>
+                <p class="text-gray-600 text-sm mb-3">${(place.description || '').substring(0, 100)}...</p>
+                
+                <div class="flex flex-wrap gap-3 mb-4">
+                    ${getAmenitiesIcons(place.amenities)}
+                </div>
+                
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-2xl font-bold text-purple-600">${place.price_per_night}</span>
+                        <span class="text-gray-600 text-sm"> SAR/night</span>
+                    </div>
+                    <a href="place.html?id=${place.id}" class="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition font-semibold">View</a>
+                </div>
+            </div>
+        </div>
+    `;
+}
